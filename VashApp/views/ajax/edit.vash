@@ -1,0 +1,19 @@
+<form action="/Save" method="post">
+     
+     <input type="hidden" name="id" value="@model.course._id" readonly>
+
+        <table>
+            <tr>
+                <th>Name:</th>
+                <td><input type="text" name="name" value="@model.course.name"></td>
+            </tr>
+            <tr>
+                <th>Author:</th>
+                <td><input type="text" name="author" value="@model.course.author" size="30"></td>
+            </tr>
+             <tr>
+                <td colspan="2"><input type="button" value="Save" id="save"></td>
+            </tr>
+          
+        </table>
+    </form>

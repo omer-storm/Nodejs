@@ -1,0 +1,73 @@
+@html.extend('layout', function(model) {
+  @html.block('content', function(model) {
+
+<script type="text/javascript">
+
+        $(document).ready(function(){
+
+            getCourses();
+            
+            $('body').on('click', 'a.title', function(){
+                //alert($(this).parent().prev().text())
+                //alert($(this).parent().parent().children().eq(0).text())
+                var course_id = $(this).attr('course_id');
+                // alert(course_id);
+
+                $.ajax({
+                url:"ajax/xhr-edit", 
+                method: "GET", 
+                data: {course_id}
+            }).done(function(res){
+                // console.log(res)
+                // alert(res);
+                $('#edit').html(res);
+            });                
+
+            });
+            
+            });
+
+             $('body').on('click', '#save', function(){
+                var frm = $('form').serialize()
+                console.log(frm)
+
+                $.ajax({
+                    url:"ajax/xhr-save", 
+                    method: "POST", 
+                    data: frm
+                }).done(function(res){
+                    console.log(res)
+                    if(res.modifiedCount === 1){
+                        getCourses();
+                    }
+                    $('#edit').html('');
+                })
+
+            })
+       
+      
+            function getCourses(){
+            $.ajax({
+                url:"ajax/xhr-list", 
+                method: "GET"
+            }).done(function(res){
+                //console.log(res)
+                $('#list').html(res);
+            })
+            }
+        
+        </script>
+
+    <h1 >@model.title</h1>
+
+
+    <p>Welcome to @model.title</p>
+        
+    <div id="list" class="col"></div>
+    <br><br>
+    <div id="edit" class="col"></div>
+     
+   
+  
+  })
+})

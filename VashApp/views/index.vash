@@ -1,0 +1,35 @@
+@html.extend('layout', function(model) {
+  @html.block('content', function(model) {
+    <h1 >@model.title</h1>
+    <p>Welcome to @model.title</p>
+        <script type="text/javascript">
+        $("p").hide()
+        </script>
+
+     <table>
+        <tr>
+            <th>Author</th>
+            <th>Name</th>
+            <th>action</th>
+        </tr>
+        @model.courses.forEach(function(course){
+            <tr>
+                <td>@course.author</td>
+                <td>
+                    
+                        @course.name
+                    
+                </td>
+              
+                <td>
+
+                     <a href="/Edit/@course._id">   Edit </a>
+                    
+                </td>
+            </tr>
+        })
+    </table>
+   
+  
+  })
+})
