@@ -31,6 +31,9 @@
                             <th>Id</th>
                             <th>Title</th>
                         </tr>
+
+
+
                         ${courses.map(course => `
                             <tr>
                                 <td>${course.courseid}</td>
@@ -45,6 +48,41 @@
                 `
                 $('#list').html(markup);
             })
+
+             $('.search_field').on('keyup',function (){
+                    var query_live = $(this).val();
+                    // alert(query_live);
+                    $.ajax({
+                   url:"query-live", 
+                    method: "GET",
+                    data: {query_live}
+                    }).done(function(courses){
+                console.log(courses)
+
+                const markup = `
+                    <table>
+                        <tr>
+                            <th>Id</th>
+                            <th>Title</th>
+                        </tr>
+
+
+
+                        ${courses.map(course => `
+                            <tr>
+                                <td>${course.courseid}</td>
+                                <td>
+                                    <a href="#!" class="title" courseid="${course.courseid}">
+                                        ${course.title}
+                                    </a>
+                                </td>
+                            </tr>
+                        `).join('')}
+                    </table>                
+                `
+                $('#list').html(markup);
+            });
+                });
 
             $('body').on('click', 'a.title', function(){
                 //alert($(this).parent().prev().text())
@@ -92,9 +130,21 @@
         })
 
     </script>
-    <h1>@model.title</h1>
-    <p>Welcome to @model.title</p>
-    <div id="list" class="col"></div>
+ 
+ 
+<div class="input-group">
+  <div class="form-outline">
+  <h4>Search:</h6>    
+    <input type="search" id="form1" class="form-control search_field" />
+  
+  </div>
+  
+</div>
+<br>
+
+
+    <div id="list" class="col">
+    </div>
     <div id="edit" class="col" style="display: none;">
         <form action="/Save" method="post">
             <table>

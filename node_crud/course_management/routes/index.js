@@ -20,7 +20,14 @@ router.get('/xhr-edit', async function(req, res) {
   res.status(200).json(course[0])
 })
 
-
+router.get('/query-live', async function(req, res) {
+  console.log(req.query.query_live);
+  // const courses = await db.Course.find({title: { '$regex' : "^"+req.query.query_live, '$options' : 'i'} });
+  const courses = await db.Course.find({"$or": [{title:{ '$regex' : "^"+req.query.query_live, '$options' : 'i'}},
+  {title:{ '$regex' : req.query.query_live, '$options' : 'i'}}
+]});
+  res.status(200).json(courses);
+})
 
 /* POST Save. */
 router.post('/xhr-save', async function(req, res) {
