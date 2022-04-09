@@ -1,0 +1,53 @@
+@html.extend('layout', function(model) {
+ @html.block('content', function(model) {
+
+    <style>
+        #uploadForm{
+            padding-top: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+        input.btn{
+            flex: 0.8;
+        }
+        button.btn{
+            flex: 0.15;
+        }
+    </style>
+
+<body>
+    <div class="container">
+        <form action="/adminpanel/upload" method="post" enctype="multipart/form-data">
+        <div>
+                <label for="name">Image Title</label>
+                <input type="text" id="name" placeholder="Name" 
+                       value="" name="name" required>
+            </div>
+            <div>
+                <label for="desc">Image Description</label>
+                <textarea id="desc" name="desc" value="" rows="2" 
+                          placeholder="Description" required>
+                </textarea>
+            </div>
+            <input type="file" name="files"
+            class="btn btn-primary" id="file"
+            multiple>
+            <button class="btn btn-primary" type="submit" style="border-radius: 4px;">
+                Upload
+            </button>
+        </form>
+    </div>
+    <script type="text/javascript">
+        document.getElementById("file").value = "";
+    </script>
+
+@model.images.forEach(function(image){
+    <img src="uploads/@image.name" width="200" height="200">
+    
+})
+</body>
+
+  })
+})
+
+

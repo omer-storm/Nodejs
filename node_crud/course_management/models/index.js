@@ -6,5 +6,7 @@ const mongoose = require('mongoose');
 
 
 module.exports = {
-    Course: require('./Course.js')
+    Course: require('./Course.js'),
+    Image: require('./Image.js')
+
 }

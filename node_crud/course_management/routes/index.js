@@ -3,6 +3,7 @@ var router = express.Router();
 const mongoose = require('mongoose')
 const db = require('../models');
 
+
 /* GET users listing. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'REST' });
